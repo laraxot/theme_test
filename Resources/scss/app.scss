@@ -1,0 +1,51 @@
+// Fonts
+//Google fonts - Playfair Display
+@import url('https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700');
+//Google fonts - Poppins
+@import url('https://fonts.googleapis.com/css?family=Poppins:300,400,400i,700');
+//Font Awesome CSS
+@import url('https://use.fontawesome.com/releases/v5.8.1/css/all.css');
+
+
+$templateColour: blue;
+
+@import "core";
+
+// Swiper
+//@import '~swiper/swiper.scss';
+//@import '~swiper/swiper-bundle.css';
+@import 'swiper/css';
+
+@import '~flatpickr';
+
+//@import '~video.js';
+
+//@import '~video.js/dist/video-js.css';
+
+//@import '~nouislider';
+
+@import "~nouislider/dist/nouislider.css";
+
+//--- videojs
+// @import 'video.js/dist/video-js.css';
+
+// City
+//@import '@videojs/themes/dist/city/index.css';
+// Fantasy
+//@import '@videojs/themes/dist/fantasy/index.css';
+// Forest
+//@import '@videojs/themes/dist/forest/index.css';
+// Sea
+//@import '@videojs/themes/dist/sea/index.css';
+
+
+@import "~select2";
+
+// Bootstrap 4:
+//@import "~select2-theme-bootstrap4";
+// If you need to import Bootstrap as well:
+@import "~select2-bootstrap-5-theme/src/select2-bootstrap-5-theme";
+// Or if you have already imported Bootstrap:
+@import "~select2-bootstrap-5-theme/src/include-all";
+
+

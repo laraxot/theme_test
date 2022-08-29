@@ -1,0 +1,12 @@
+{
+    "/js/app.js": "/js/app.js",
+    "/js/manifest.js": "/js/manifest.js",
+    "/css/app.css": "/css/app.css",
+    "/js/vendor.js": "/js/vendor.js",
+    "/public_html/themes/Test/dist/css/app.css": "/public_html/themes/Test/dist/css/app.css",
+    "/public_html/themes/Test/dist/css/app.old": "/public_html/themes/Test/dist/css/app.old",
+    "/public_html/themes/Test/dist/js/app.js": "/public_html/themes/Test/dist/js/app.js",
+    "/public_html/themes/Test/dist/js/manifest.js": "/public_html/themes/Test/dist/js/manifest.js",
+    "/public_html/themes/Test/dist/js/vendor.js": "/public_html/themes/Test/dist/js/vendor.js",
+    "/public_html/themes/Test/dist/mix-manifest.json": "/public_html/themes/Test/dist/mix-manifest.json"
+}
