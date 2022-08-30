@@ -1,98 +1,102 @@
-<x-layout>
-    <section class="px-6 py-8">
-        <main class="max-w-lg p-6 mx-auto mt-10 bg-gray-100 border border-gray-200 rounded-xl">
-            <h1 class="text-xl font-bold text-center">Register</h1>
+@extends('adm_theme::auth.auth-page', ['auth_type' => 'register'])
 
-            <form action="/register" method="post">
-                @csrf
+@php($login_url = View::getSection('login_url') ?? config('adm_theme::adminlte.login_url', 'login'))
+@php($register_url = View::getSection('register_url') ?? config('adm_theme::adminlte.register_url', 'register'))
 
-                <!-- Name -->
-                <div class="mb-6">
-                    <label for="name" class="block mb-2 text-xs font-bold text-gray-700 uppercase">
-                        Name
-                    </label>
+@if (config('adm_theme::adminlte.use_route_url', false))
+    @php($login_url = $login_url ? route($login_url) : '')
+    @php($register_url = $register_url ? route($register_url) : '')
+@else
+    @php($login_url = $login_url ? url($login_url) : '')
+    @php($register_url = $register_url ? url($register_url) : '')
+@endif
 
-                    <input class="w-full p-2 border border-gray-400"
-                        type="text"
-                        name="name"
-                        id="name"
-                        value="{{ old('name') }}"
-                        required
-                        >
+@section('auth_header', __('adminlte::adminlte.register_message'))
 
-                    @error('name')
-                        <p class="mt-2 text-xs text-red-500">{{ $message }}</p>
-                    @enderror
+@section('auth_body')
+    <form action="{{-- $register_url --}}{{ route('register') }}" method="post">
+        {{ csrf_field() }}
 
+        {{-- Name field --}}
+        <div class="input-group mb-3">
+            <input type="text" name="username" class="form-control {{ $errors->has('username') ? 'is-invalid' : '' }}"
+                value="{{ old('username') }}" placeholder="{{ __('adminlte::adminlte.full_name') }}" autofocus>
+            <div class="input-group-append">
+                <div class="input-group-text">
+                    <span class="fas fa-user {{ config('adm_theme::adminlte.classes_auth_icon', '') }}"></span>
                 </div>
-                <!-- End Name -->
-
-                <!-- Username -->
-                <div class="mb-6">
-                    <label for="username" class="block mb-2 text-xs font-bold text-gray-700 uppercase">
-                        Username
-                    </label>
-
-                    <input class="w-full p-2 border border-gray-400"
-                        type="text"
-                        name="username"
-                        id="username"
-                        value="{{ old('username') }}"
-                        required
-                        >
-
+            </div>
+            @if ($errors->has('username'))
+                <div class="invalid-feedback">
+                    <strong>{{ $errors->first('username') }}</strong>
                 </div>
+            @endif
+        </div>
 
-                @error('username')
-                    <p class="mt-2 text-xs text-red-500">{{ $message }}</p>
-                @enderror
-
-                <!-- End Username -->
-
-                <!-- Email -->
-                <div class="mb-6">
-                    <label for="email" class="block mb-2 text-xs font-bold text-gray-700 uppercase">
-                        Email
-                    </label>
-
-                    <input class="w-full p-2 border border-gray-400"
-                        type="email"
-                        name="email"
-                        id="email"
-                        value="{{ old('email') }}"
-                        required
-                        >
-
-                        @error('email')
-                            <p class="mt-2 text-xs text-red-500">{{ $message }}</p>
-                        @enderror
+        {{-- Email field --}}
+        <div class="input-group mb-3">
+            <input type="email" name="email" class="form-control {{ $errors->has('email') ? 'is-invalid' : '' }}"
+                value="{{ old('email') }}" placeholder="{{ __('adminlte::adminlte.email') }}">
+            <div class="input-group-append">
+                <div class="input-group-text">
+                    <span class="fas fa-envelope {{ config('adm_theme::adminlte.classes_auth_icon', '') }}"></span>
                 </div>
-                <!-- End Email -->
-
-                <!-- Password -->
-                <div class="mb-6">
-                    <label for="password" class="block mb-2 text-xs font-bold text-gray-700 uppercase">
-                        Password
-                    </label>
-
-                    <input class="w-full p-2 border border-gray-400"
-                        type="password"
-                        name="password"
-                        id="password"
-                        required
-                        >
-
+            </div>
+            @if ($errors->has('email'))
+                <div class="invalid-feedback">
+                    <strong>{{ $errors->first('email') }}</strong>
                 </div>
-                <!-- End Password -->
+            @endif
+        </div>
 
-                <!-- Submit Button -->
-                <div class="mb-6">
-                    <button type="submit"
-                        class="px-4 py-2 text-white bg-gray-700 rounded hover:bg-gray-800">
-                        Submit
-                    </button>
+        {{-- Password field --}}
+        <div class="input-group mb-3">
+            <input type="password" name="password"
+                class="form-control {{ $errors->has('password') ? 'is-invalid' : '' }}"
+                placeholder="{{ __('adminlte::adminlte.password') }}">
+            <div class="input-group-append">
+                <div class="input-group-text">
+                    <span class="fas fa-lock {{ config('adm_theme::adminlte.classes_auth_icon', '') }}"></span>
                 </div>
-                <!-- End Submit -->
-            </form>
-    </section>
-</x-layout>
+            </div>
+            @if ($errors->has('password'))
+                <div class="invalid-feedback">
+                    <strong>{{ $errors->first('password') }}</strong>
+                </div>
+            @endif
+        </div>
+
+        {{-- Confirm password field --}}
+        <div class="input-group mb-3">
+            <input type="password" name="password_confirmation"
+                class="form-control {{ $errors->has('password_confirmation') ? 'is-invalid' : '' }}"
+                placeholder="{{ __('adminlte::adminlte.retype_password') }}">
+            <div class="input-group-append">
+                <div class="input-group-text">
+                    <span class="fas fa-lock {{ config('adm_theme::adminlte.classes_auth_icon', '') }}"></span>
+                </div>
+            </div>
+            @if ($errors->has('password_confirmation'))
+                <div class="invalid-feedback">
+                    <strong>{{ $errors->first('password_confirmation') }}</strong>
+                </div>
+            @endif
+        </div>
+
+        {{-- Register button --}}
+        <button type="submit"
+            class="btn btn-block {{ config('adm_theme::adminlte.classes_auth_btn', 'btn-flat btn-primary') }}">
+            <span class="fas fa-user-plus"></span>
+            {{ __('adminlte::adminlte.register') }}
+        </button>
+
+    </form>
+@stop
+
+@section('auth_footer')
+    <p class="my-0">
+        <a href="{{ $login_url }}">
+            {{ __('adminlte::adminlte.i_already_have_a_membership') }}
+        </a>
+    </p>
+@stop
